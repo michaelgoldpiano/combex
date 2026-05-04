@@ -1,0 +1,1 @@
+export const COMBINATOR = Symbol('combinator');

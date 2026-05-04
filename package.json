@@ -1,0 +1,24 @@
+{
+  "name": "combex",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "vitest --typecheck",
+    "build": "tsup"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
