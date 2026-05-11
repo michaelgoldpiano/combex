@@ -22,7 +22,7 @@ export const and = <
   const R = And<Resolve<P1>, Resolve<R2>>,
 >(
   param1: P1,
-  param2: (f1: NoInfer<Resolve<P1>>) => R2,
+  param2: (f1: Resolve<P1>) => R2,
 ): Combinator<R> => {
   return combinator('and', function*() {
     yield* dispatcher(param2, {
