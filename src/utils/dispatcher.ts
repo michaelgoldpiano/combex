@@ -6,7 +6,7 @@ const validate = {
   function: <const T>(v: unknown): v is Extract<T, Function> => typeof v === 'function',
   combinator: <T>(v: unknown): v is Extract<T, Combinator> => v !== null && typeof v === 'object' && COMBINATOR in v,
   arr: <const T>(v: unknown): v is Extract<T, Arr> => Array.isArray(v),
-  obj: <const T>(v: unknown): v is Extract<T, Obj> => typeof v === 'object' && v !== null && !Array.isArray(v) && !(COMBINATOR in v),
+  obj: <const T>(v: unknown): v is Extract<T, Obj> => typeof v === 'object' && v !== null && Object.getPrototypeOf(v) === Object.prototype && !(COMBINATOR in v),
 } as const;
 
 export const dispatcher = <
