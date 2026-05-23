@@ -173,6 +173,15 @@ const c2 = any({ limit: one(10, 20), offset: one(0, 10) });
 // type: Combinator<{ limit?: 10 | 20, offset?: 0 | 10 }>
 ```
 
+## Potential TODOs
+
+1. The function `and` turning into dot format `one(...).and(...)` for user clarity.
+2. Top level definition encouraged for all combinators, i.e. using `combinator(...)`.  This is in part for clarity of definitions, in part for resolving types more clearly (removing `.and` from the type).
+3. Returning type `Optional<...>` instead of labeling with `?` on optional elements.  This is because of the way that TypeScript conflates `optional` with `undefined`, creating unclear types.
+4. Encourage users to use the `tsconfig.json` setting `"exactOptionalPropertyTypes": true`, which limits TypeScript from conflating `optional` and `undefined` to some degree.
+5. Handle spreading a combinator, e.g. `one([1, ...any([2, 3]))`.
+6. Remove `all`, it is the same as `one`.
+
 ## Full Test Example
 
 ```typescript
