@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "test": "vitest --typecheck",
-    "build": "tsup",
-    "prepare": "tsup"
+    "build": "tsup"
   },
   "exports": {
     ".": {
