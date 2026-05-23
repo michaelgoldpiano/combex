@@ -12,10 +12,10 @@ import { productArr, productObj } from '../algo/product';
  * @example one(combo(1, 2), 3) => 1 | 2 | 3
  */
 export const one = <
-  const T,
-  const R extends Resolve<T>,
+  const T extends unknown[],
+  const R extends Resolve<T[number]>,
 >(
-  ...values: T[]
+  ...values: T
 ): Combinator<R> => {
   return combinator('one', function*() {
     for (const v of values) {
