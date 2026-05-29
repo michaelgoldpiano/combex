@@ -73,7 +73,7 @@ const out = {
   arrEmpty: () => combo([]) as Combinator<[]>,
 
   obj: () => combo({ o1: 'o1', o2: 'o2', o3: 'o3' }) as Combinator<{ o1: 'o1', o2: 'o2', o3: 'o3'}>,
-  condObj: () => combo({ o1: 'o1', o2: 'o2', o3: 'o3' }) as Combinator<And<{ o1: 'o1' } | { never: 'never' }, { o2: 'o2', o3: 'o3' }>>,
+  condObj: () => combo({ o1: 'o1', o2: 'o2', o3: 'o3' }) as Combinator<And<{ o1?: 'o1', never?: 'never' }, { o2: 'o2', o3: 'o3' }>>,
   objCond: () => combo({ o1: 'o1', o2: 'o2', o3: 'o3' }) as Combinator<And<{ o1: 'o1' }, { o2: 'o2', o3: 'o3' } | { never: 'never' }>>,
   dynObj: () => combo({ o1: 'o1', l: 1, copy: 'o1' }) as Combinator<{ o1: 'o1', l: number, copy: 'o1' }>,
   dynObjCond: () => combo({ o1: 'o1', l: 1, copy: 'o1' }) as Combinator<And<{ o1: 'o1' }, { l: number, copy: 'o1' } | { never: 'never' }>>,
@@ -214,5 +214,16 @@ describe('and', () => {
       it('and([1], combo(combo([2])))', () => expectTypeOf(and([1], (t) => comboNonLiteral(combo([2])))).toEqualTypeOf<Combinator<[1, 2]>>());
       it('and({ a: 1 }, combo(combo({ b: 2 })))', () => expectTypeOf(and({ a: 1 }, (t) => comboNonLiteral(combo({ b: 2 })))).toEqualTypeOf<Combinator<{ a: 1, b: 2 }>>());
     });
+    it('and with union of objects with different-length array values', () =>
+      expectTypeOf(
+        and(
+          (Math.random() > 0.5
+            ? { dbSetup: [1, 2] as const, cookie: undefined as undefined }
+            : { dbSetup: [1, 2, 3, 4] as const, cookie: 'token' as string }
+          ),
+          (f1) => ({ body: 'b' as const })
+        )
+      ).toEqualTypeOf<Combinator<{ dbSetup: (1 | 2 | 3 | 4)[], cookie: string | undefined, body: 'b' }>>()
+    );
   });
 });
