@@ -181,6 +181,7 @@ const c2 = any({ limit: one(10, 20), offset: one(0, 10) });
 4. Encourage users to use the `tsconfig.json` setting `"exactOptionalPropertyTypes": true`, which limits TypeScript from conflating `optional` and `undefined` to some degree.
 5. Handle spreading a combinator, e.g. `one([1, ...any([2, 3]))`.
 6. Remove `all`, it is the same as `one`.
+7. `any` shadows built-in term, so we need to rename.
 
 ## Full Test Example
 
