@@ -72,7 +72,7 @@ type ResolveObj<A extends Obj> = Expand<OmitNever<Mutable<{
     [K in keyof A]: Resolve<A[K]>;
 }>>>;
 type GroupMap<A, B> = (IsUnion<A> extends true ? {
-    resolve: (A extends Combinator<infer U> ? U : A) extends infer Resolved ? [Resolved] extends [Arr] ? ResolveArrayUnion<Resolved extends Arr ? ResolveArr<Resolved> : never> : [Resolved] extends [Obj] ? Resolved extends Obj ? ResolveObj<Resolved> : never : Resolved : never;
+    resolve: (A extends Combinator<infer U> ? U : A) extends infer Resolved ? [Resolved] extends [Arr] ? ResolveArrayUnion<ResolveArr<Resolved>> : [Resolved] extends [Obj] ? ResolveObj<MergeUnion<Resolved>> : Resolved : never;
     permuted: never;
     subset: never;
     nonEmpty: never;
