@@ -1,6 +1,6 @@
 # combex
 
-A TypeScript library for generating exhaustive combinations of test cases. Instead of manually listing every case, you describe the shape of your data and combex generates every valid combination — with full type inference.
+A TypeScript library for generating exhaustive combinations of test cases. Instead of manually listing every case, you describe the shape of your data. Combex generates every valid combination, with full type inference.
 
 ## Installation
 
@@ -63,7 +63,7 @@ This generates all 36 combinations: every method × path pair, with the appropri
 
 ## How It Works
 
-combex works by nesting combinators inside plain arrays and objects. When you iterate a combinator, it yields every combination of its contents. Nesting combinators inside each other composes them — the outer combinator automatically takes the cartesian product of everything inside it.
+combex works by nesting combinators inside plain arrays and objects. When you iterate a combinator, it yields every combination of its contents. Nesting combinators inside each other composes them: the outer combinator automatically takes the cartesian product of everything inside it.
 
 `and` is the exception: it lets you make the second argument depend on the resolved value of the first, which is how you express branching logic like the `switch` above.
 
@@ -139,7 +139,7 @@ permute([1, 2, 3])
 
 ### `literal(value)`
 
-Escapes any further processing — the value is yielded as-is, without combex trying to expand it.
+Escapes any further processing.  The value is yielded as-is, without combex trying to expand it.
 
 ```typescript
 literal([1, 2, 3])
@@ -163,7 +163,7 @@ range(1, 3)  // yields: 1, 2, 3
 
 ## Type System
 
-combex infers the strongest possible type for every combinator. The result type of iterating a combinator reflects all possible values it can yield — including conditional branches from `and`, optional fields from `any`/`some`/`subset`, and tuple structure from arrays.
+combex infers the strongest possible type for every combinator. The result type of iterating a combinator reflects all possible values it can yield, including conditional branches from `and`, optional fields from `any`/`some`/`subset`, and tuple structure from arrays.
 
 ```typescript
 const c1 = and([1], (t) => [2, 3]);
